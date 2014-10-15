@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="page-header editTitle">
+            <p>人的一生是一场马拉松，一时的快慢并不代表什么，关键是能坚持到最后</p>
+            <a id="circle_back" href="#/admin">后退</a>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3 aside">
+            <div class="control-group">
+                <h6 class="control-label">Title</h6>
+                <input type="text" id="txt_title" ng-model="title" class="controls"  />
+                <h6>类别</h6>
+                <select id="sel_type" ng-model="articleType">
+                    <option value="1" >技术</option>
+                    <option value="2" >生活</option>
+                    <option value="3" >兴趣</option>
+                </select>
+                <h6>标签</h6>
+                <input id="txt_badge" ng-model="newTag" type="text"/><input ng-click="tagAdd()" id="btn_badge" type="button" value="添加" class="btn btn-primary"/>
+                <fieldset id="badges">
+                    <!--<span class='badge badge-info mbadge'>{$T.tags[$T.i-1].name_str}</span>-->
+                    <span class='badge badge-info mbadge'ng-Dblclick="removeTag(tag)" ng-repeat="tag in tags">{{tag.name_str}}</span>
+                </fieldset>
+                <br/>
+                <h6>概要</h6>
+                <textarea name="" id="txt_synopsis" ng-model="synopsis" cols="30" rows="10"></textarea>
+                <br/>
+                <br/>
+                <input type="button" ng-click="submit()" class="btn btn-primary btn_submit" value="提交" id="btn_submit"/>
+            </div>
+
+        </div>
+        <div class="span8 articleinput">
+            <textarea  id="content" style="width:850px;height:500px;visibility:hidden;" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+</div>

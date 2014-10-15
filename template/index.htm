@@ -1,0 +1,83 @@
+﻿<div>
+<div class="nav navbar-fixed-top">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav" id="index_nav">
+                <li><a class="home"  href="#/home">主页</a></li>
+                <li><a class="tech head" aType="1"  href="#/article/1">技术文章</a></li>
+                <li><a class="life head" aType="2"  href="#/article/2">生活</a></li>
+                <li><a class="interest head" aType="3" href="#/article/3">兴趣</a></li>
+                <li><a class="about"  href="#/about">关于</a></li>
+                <li id='admin' style="display: none"><a href='javascript:;' class=''>admin</a></li>
+            </ul>
+            <div>
+                <script type="text/ng-template" id="loginPanel.html">
+                    <div class="modal-header">
+                        <button type="button" class="close closed" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3>管理员登录</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" ng-keydown="ok($event)">
+                            <div class="control-group">
+                                <label class="control-label" for="loginUserName">Account</label>
+                                <div class="controls">
+                                    <input type="text" ng-model="account" id="loginUserName" placeholder="Account"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="loginPassword">Password</label>
+                                <div class="controls">
+                                    <input type="password" ng-model="token" id="loginPassword" placeholder=""/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button class="btn btn-primary" ng-click="ok()">OK</button>-->
+                        <!--<button class="btn btn-warning" ng-click="cancel()">Cancel</button>-->
+                        <button class="btn closed" data-dismiss="modal" ng-click="cancel()" aria-hidden="true">关闭</button>
+                        <button id="btn_login" ng-click="ok()" class="btn btn-primary submit">登录</button>
+                    </div>
+                </script>
+                <i class="icon-user icon-3x user_login" ng-click="open()"></i>
+                <!--<button class="btn btn-default" ng-click="open()">Open me!</button>-->
+                <!--<div ng-show="selected">Selection from a modal: {{ selected }}</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<hr class=""/>
+<div id="mainDiv" class="block" template="true" load="true"  app="index" cmd="home">
+    <div class="block text-center">
+        <div>
+            <div>
+                <div>
+                    <carousel interval="myInterval">
+                        <slide ng-repeat="slide in slides" active="slide.active">
+                            <img ng-src="{{slide.image}}" style="margin:auto;">
+                            <div class="carousel-caption">
+                                <h4>Slide {{$index}}</h4>
+                                <p>{{slide.text}}</p>
+                            </div>
+                        </slide>
+                    </carousel>
+                </div>
+            </div>
+
+            <div>
+                <img src="./img/wall/560.jpg" class="img-circle blog_thumb" alt=""/>
+            </div>
+            <div class="blog_home_seft">
+                <p>
+                    这里是成千上万个网络网站之一</br>
+                    <strong title="没错!就是Cafter.Blog">Cafter.Blog</strong><br/>
+                    在这里<br/>
+                    我有时会分享我的身边琐碎事、趣事、烦恼事<br/>
+                    我有时会分享我接触到的、感兴趣的技术<br/>
+                    也有时会抱怨一下生活
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

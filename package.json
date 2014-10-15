@@ -1,0 +1,22 @@
+{
+    "name": "Cafter.Blog",
+    "version": "1.0.1",
+    "author": "Huang JunLe",
+    "description": "纯粹的个人blog!",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "async":"0.1.22",
+        "bufferhelper":"0.2.0",
+        "formidable":"1.0.11",
+        "generic-pool":"2.0.3",
+        "iconv-lite":"0.2.8",
+        "mongodb":"1.2.14",
+        "node-gyp":"0.8.2",
+        "redis":"0.8.3",
+        "socket.io":"0.9.13",
+        "mkdir":"0.0.2"
+    }
+}
+

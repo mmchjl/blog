@@ -1,0 +1,104 @@
+﻿<div class="container admin">
+        <div class="pager">
+            <h3>后台管理</h3>
+            <a class="icon-home icon-4x admin_home"  href="#/home"  title="回到主页"></a>
+        </div>
+        <tabset>
+            <tab heading="技术">
+                <div class="tab-pane">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>标题</th>
+                            <th>标签</th>
+                            <th>添加日期</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="article in tech">
+                            <td>{{$index}}</td>
+                            <td>{{article.title_str}}</td>
+                            <td>
+                                <span ng-repeat="tag in article.tags">
+                                    {{tag.name_str}}
+                                </span>
+                            </td>
+                            <td>{{article.updateTime_date| date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                            <td><a href="javascript:;" ng-click="modify(article)" data-toggle="modal" class="btn-link update">修改</a></td>
+                            <td><a class="btn-link delete" ng-click="deleted({_id:article._id,tag:'tech'})" href="javascript:;">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <input type="button" ng-click="Update()" class="btn btn-primary btn-block admin_add" value="添加文章"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </tab>
+            <tab heading="生活">
+                <div class="tab-pane">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>标题</th>
+                            <th>标签</th>
+                            <th>添加日期</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="article in life">
+                            <td>{{$index}}</td>
+                            <td>{{article.title_str}}</td>
+                            <td>
+                                <span ng-repeat="tag in article.tags">
+                                    {{tag.name_str}}
+                                </span>
+                            </td>
+                            <td>{{article.updateTime_date| date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                            <td><a href="javascript:;" ng-click="modify({_id:article._id})" data-toggle="modal" class="btn-link update">修改</a></td>
+                            <td><a class="btn-link delete" ng-click="deleted({_id:article._id,tag:'life'})" href="javascript:;">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <input type="button" ng-click="Update()" class="btn btn-primary btn-block admin_add" value="添加文章"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </tab>
+            <tab heading="兴趣">
+                <div class="tab-pane">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>标题</th>
+                            <th>标签</th>
+                            <th>添加日期</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="article in interst">
+                            <td>{{$index}}</td>
+                            <td>{{article.title_str}}</td>
+                            <td>
+                                <span ng-repeat="tag in article.tags">
+                                    {{tag.name_str}}
+                                </span>
+                            </td>
+                            <td>{{article.updateTime_date| date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                            <td><a href="javascript:;" ng-click="modify({_id:article._id})" data-toggle="modal" class="btn-link update">修改</a></td>
+                            <td><a class="btn-link delete" ng-click="deleted({_id:article._id,tag:'interst'})" href="javascript:;">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <input type="button" ng-click="Update()" class="btn btn-primary btn-block admin_add" value="添加文章"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </tab>
+        </tabset>
+</div>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html ng-app="blogApp">
+<head>
+    <title></title>
+    <link href="css/StyleMain.css" rel="stylesheet" type="text/css" />
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="./css/bootstrap.css"/>
+    <script type="text/javascript">
+        var reg=/MSIE (\d+)/;
+        if(reg.test(window.navigator.appVersion)&&reg.exec(window.navigator.appVersion).length>0){
+            var ieVerson = reg.exec(window.navigator.appVersion)[1];
+            if(ieVerson&&parseInt(ieVerson)<=8){
+                //alert("IE!>..<");
+                window.location="template/TryNewLife.html";
+            }
+        }
+    </script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/lib/angular.min.js"></script>
+    <script type="text/javascript" src="./js/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script type="text/javascript" src="./js/lib/angular-route.js"></script>
+    <script type="text/javascript" src="./js/lib/angular-resource.min.js"></script>
+    <script type="text/javascript" src="./js/lib/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="./js/kindeditor.js"></script>
+    <script type="text/javascript" src="./js/prettify.js"></script>
+    <script type="text/javascript" src="./js/zh_CN.js"></script>
+    <script type="text/javascript" src="./js/service/articleServices.js"></script>
+    <script type="text/javascript" src="./js/controller/articleControllers.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+</head>
+<body id="body" >
+<div ng-view></div>
+<audio style="display: none" id="au" controls="controls"   src="/file/getmp3?id=536f060a271e5b3c10000001"></audio>
+<div style="padding: 5px">
+    <button id="btn_musicPlay" class="icon-2x  icon-play-circle" onclick="stop()"></button>
+</div>
+<script>
+    function stop(){
+        //alert("stop");
+        var btn = $("#btn_musicPlay");
+        var play="icon-play-circle";
+        var pause = "icon-stop";
+        if(btn.hasClass(play)){
+            au.play();
+            btn.removeClass(play).addClass(pause);
+        }else{
+            au.pause();
+            btn.removeClass(pause).addClass(play);
+        }
+
+    }
+</script>
+</body>
+</html>

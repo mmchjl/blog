@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+    <div style="width: 1000px;margin: 10px auto;font-family: 'sans serif';font-size: 20px">
+        <center><img src="../img/pic.png" alt="" style="align-self:center"/></center>
+
+        <p>Sorry!~ 为了让您能有更好的体验效果，请升级您的浏览器至<a href="javascript:;" target="_blank">IE 9.0</a>以上 或者<a href="javascript:;" target="_blank">FireFox</a> 或者  <a href="javascript:;" target="_blank">Chrome</a> 最新版</p>
+        <!--<audio style="display: none" id="au" controls="controls" autoplay="autoplay"  src="/file/getmp3?id=536f060a271e5b3c10000001"></audio>-->
+        <audio style="display: none" id="au" controls="controls" autoplay="autoplay"  src="/file/getmp3?id=536f08727bcff89815000001"></audio>
+        <div>
+            <input type="file" id="file_ajaxUpLoad"/>
+            <button id="btn_upload" onclick="Upload()">UPLOAD</button>
+             上传进度:<progress id="processBar" style="width:400px" value="0"></progress>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function Upload(){
+            var file = file_ajaxUpLoad.files[0];
+            processBar.value=0;
+            if(!file){
+                return;
+            }
+            var form = new FormData();
+            form.append("files",file);
+            var xhr = new XMLHttpRequest();
+            xhr.upload.addEventListener("progress",processShow,false);
+            xhr.addEventListener("load",processCompleted,false);
+            xhr.addEventListener("error",processError,false);
+            xhr.addEventListener("abort",processCancel,false);
+            xhr.open("POST","/file/upload");
+            xhr.send(form);
+        }
+
+        function processShow(env){
+            console.dir(env);
+            if(env&&env.lengthComputable){
+                processBar.value=Math.round(env.loaded/env.total*100);
+            }else{
+                processBar.innerHTML="unable to compute";
+            }
+        }
+
+        function processCompleted(env){
+            alert("Upload Finish!")
+            //console.dir(env);
+        }
+
+        function processError(){
+            alert("There was an error attempting to upload the file!");
+        }
+
+        function processCancel(){
+            alert("The uploaded has been canceled by the user or the browser dropped the connection!");
+        }
+
+    </script>
+</body>
+</html>

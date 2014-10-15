@@ -1,0 +1,140 @@
+﻿<div class="nav navbar-fixed-top">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav" id="index_nav">
+                <li><a class="home"  href="#/home">主页</a></li>
+                <li><a class="tech head" aType="1"  href="#/article/1">技术文章</a></li>
+                <li><a class="life head" aType="2"  href="#/article/2">生活</a></li>
+                <li><a class="interest head" aType="3" href="#/article/3">兴趣</a></li>
+                <li><a class="about"  href="#/about">关于</a></li>
+                <li id='admin' style="display: none"><a href='javascript:;' class=''>admin</a></li>
+            </ul>
+            <i class="icon-user icon-3x user_login" href="#loginPanel" data-toggle="modal"></i>
+        </div>
+    </div>
+</div>
+<hr class=""/>
+<div id="mainDiv" class="block" template="true" load="true"  app="index" cmd="home">
+
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8" id="contentDiv"  template="true" load="true" app="index" cmd="list">
+                <div class="right_div">
+
+                    <div>
+                        <h2 class="text-center">{{article.title_str}}</h2>
+                        <i class="icon-tag detail_tag" ng-repeat="tag in article.tags">{{tag.name_str}}</i>
+                        <i class="icon-time detail_time">{{ article.updateTime_date|date:"yyyy年MM月dd日"}}</i>
+                        <hr class="datail_line"/>
+                        <div class="article padding-small" ng-bind-html="myHTML">
+                        </div>
+                    </div>
+                    <hr/>
+                    <div id="comment_panel" class="padding-small" ng-show="article.comments.length">
+                        <div class="header">{{article.comments.length}}回复</div>
+                        <hr class="comment-split" />
+                        <div class="commentshow" ng-mouseover="hover(comment.commentId)" ng-mouseout="out(comment.commentId)" ng-repeat="comment in article.comments">
+                        <div class="author">
+                            <span class="author_nickname">{{comment.nickname_str}}</span>
+                            <span class="comment_time">{{ comment.addDate_date|date:"MM月dd号 hh:mm:ss"}}</span>
+                            <i>#{{$index}}</i>
+                            <a class="reply" href="javascript:;">回复</a>
+                        </div>
+                        <div class="neirong"> <p>{{comment.comment_str}}</p></div>
+
+                        <div class="comments-thumbs">
+                            <i title="删除" removeId="{{comment.commentId}}" style="display:none" ng-click="removecomment({commentId:comment.commentId,articleId:article._id})" class="icon-remove removecomment"></i>
+                            <i title="赞成" ng-click="thumb({commentId:comment.commentId,articleId:article._id,isYes:true})"  class="icon-thumbs-up up thumb">
+                                {{comment.yes||0}}
+                            </i>
+                            <i title="反对" ng-click="thumb({commentId:comment.commentId,articleId:article._id,isYes:false})" class="icon-thumbs-down down thumb">
+                                {{comment.no||0}}
+                            </i>
+                        </div>
+                    </div>
+                    <div class="replypanel">
+                         <textarea class="replytext" cols="30" rows="10"></textarea> <br/>
+                         <input type="button" class="btn btn-primary btn_reply" value="回复"/>
+                    </div>
+            </div>
+           <hr ng-show="article.comments.length"/>
+            <div class="comment">
+                <div class="comment-header"></div>
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="detail_nickName"><i class="icon-user"></i> 昵称</label>
+                        <div class="controls">
+                            <input type="text" id="detail_nickName" ng-model="nickName" placeholder="昵称">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="detail_email"><i class="icon-envelope"></i> Email</label>
+                        <div class="controls">
+                            <input type="text" id="detail_email" ng-model="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <textarea id="detail_comment" ng-model="commentText" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="button" id="detail_submit" ng-click="comment()" class="btn btn-block btn-primary">评论</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+            </div>
+            <div class="span3 affix left_div">
+                <div  id="rangeDiv"  ng-controller="rangeListCtrl">
+                    <div id="rangeDiv" class="padding-small">
+                        <div class="text-center header">最新文章</div>
+                        <ul class="unstyled" ng-repeat="title in titles">
+                            <li>
+                                <a class="hotarticle rangeList"  href="#/detail/{{title._id}}" aid="{{title._id}}">
+                                    {{title.title_str}}
+                                </a>
+                                <em>({{title.replies||0}}/{{title.views||0}})</em>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="tagsDiv" class="aside"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loginPanel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close closed" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>管理员登录</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="loginUserName">Account</label>
+                <div class="controls">
+                    <input type="text"  ng-model="uid" id="loginUserName" placeholder="Account"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="loginPassword">Password</label>
+                <div class="controls">
+                    <input type="password" ng-model="pwd" id="loginPassword" placeholder=""/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn closed" data-dismiss="modal" aria-hidden="true">关闭</button>
+        <button id="btn_login" ng-click="login()" class="btn btn-primary submit">登录</button>
+    </div>
+</div>
+
+
+
+

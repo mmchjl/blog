@@ -1,0 +1,84 @@
+﻿<div class="nav navbar-fixed-top">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav" id="index_nav">
+                <li><a class="home"  href="#/home">主页</a></li>
+                <li><a class="tech head" aType="1"  href="#/article/1">技术文章</a></li>
+                <li><a class="life head" aType="2"  href="#/article/2">生活</a></li>
+                <li><a class="interest head" aType="3" href="#/article/3">兴趣</a></li>
+                <li><a class="about"  href="#/about">关于</a></li>
+                <li id='admin' style="display: none"><a href='javascript:;' class=''>admin</a></li>
+            </ul>
+            <i class="icon-user icon-3x user_login" href="#loginPanel" data-toggle="modal"></i>
+        </div>
+    </div>
+</div>
+<hr class=""/>
+<div id="mainDiv" class="block" template="true" load="true"  app="index" cmd="home">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8" id="contentDiv"  template="true" load="true" app="index" cmd="list">
+                <div class="right_div">
+                    <div>
+                        <section class="padding-small articleItem" ng-repeat="article in articles">
+                            <div>
+                                <span class="list_title" aid="{{article._id}}"><span  ng-click="checkArticle(article)" class="list_title">{{article.title_str}}</span></span>
+                                <em> <i class="icon-time" title="记录于{{article.updateTime_date|date:'yyyy/MM/dd hh:mm'}}"></i> {{article.updateTime_date|date:"yyyy/MM/dd hh:mm"}}</em>
+                                <em><i class="icon-comment">{{article.comments.length||0}}</i></em>
+                                <em class="list_tags" ng-repeat="tag in article.tags"><i title="标签" class="icon-tags">{{tag.name_str}}</i></em>
+
+
+                                <hr class="list_header_line"/>
+                                <p class="list_Synopsis"><strong>概要:</strong>{{article.synopsis_str}}</p>
+                                <div><i class="icon-hand-up list_check" title="查看文章"></i></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="span3 affix left_div">
+                <div  id="rangeDiv"  ng-controller="rangeListCtrl">
+                    <div id="rangeDiv" class="padding-small">
+                        <div class="text-center header">最新文章</div>
+                        <ul class="unstyled" ng-repeat="title in titles">
+                            <li><a class="hotarticle rangeList"  href="#/detail/{{title._id}}" aid="{{title._id}}">
+                                {{title.title_str}}
+                            </a>
+                                <em>({{title.replies||0}}/{{title.views||0}})</em>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="tagsDiv" class="aside"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="loginPanel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close closed" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>管理员登录</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="loginUserName">Account</label>
+                <div class="controls">
+                    <input type="text" id="loginUserName" placeholder="Account">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="loginPassword">Password</label>
+                <div class="controls">
+                    <input type="password" id="loginPassword" placeholder="">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn closed" data-dismiss="modal" aria-hidden="true">关闭</button>
+        <button id="btn_login" class="btn btn-primary submit">登录</button>
+    </div>
+</div>
